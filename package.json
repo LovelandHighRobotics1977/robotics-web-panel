@@ -26,6 +26,11 @@
   },
   "homepage": "https://github.com/LovelandHighRobotics1977/robotics-web-panel#readme",
   "dependencies": {
-    "electron": "^4.0.5"
+    "electron": "^4.0.5",
+    "fs": "0.0.1-security",
+    "fs-extra": "^7.0.1",
+    "http": "0.0.0",
+    "node-cmd": "^3.0.0",
+    "unzip": "^0.1.11"
   }
 }
