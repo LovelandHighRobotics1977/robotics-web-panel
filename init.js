@@ -1,19 +1,24 @@
 const path = require("path");
+const admzip = require("adm-zip");
+const fs = require("fs");
 const unzip = require("unzip");
-const fs = require("fs-extra");
-const http = require("http");
+const request = require("request");
 const cmd = require("node-cmd");
 
 function init() {
-    http.get("http://github.com/LovelandHighRobotics1977/robotics-web/archive/master.zip", function (response) {
-        response.pipe(unzip.Extract({
-            path: path.join(path.dirname(fs.realpathSync(__filename)), 'site')
-        }).on('close', () => {
-            build()
-        }))
-    });
+    console.log('Init')
+    const file = fs.createWriteStream("master.zip");
+    request('http://github.com/LovelandHighRobotics1977/robotics-web/archive/master.zip').pipe(fs.createWriteStream('master.zip'));
+    function extract() {
+        console.log("Extract")
+        
+        /*fs.createReadStream('master.zip').pipe(unzip.Extract({
+            path: 'site'
+        }));*/
+    }
 
     function build() {
+        console.log('Beginning Build...')
         cmd.run(`
             cd site
             npm install

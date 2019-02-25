@@ -26,11 +26,16 @@
   },
   "homepage": "https://github.com/LovelandHighRobotics1977/robotics-web-panel#readme",
   "dependencies": {
+    "adm-zip": "^0.4.13",
     "electron": "^4.0.5",
     "fs": "0.0.1-security",
     "fs-extra": "^7.0.1",
     "http": "0.0.0",
+    "minizip": "^1.0.0",
     "node-cmd": "^3.0.0",
-    "unzip": "^0.1.11"
+    "request": "^2.88.0",
+    "stream": "0.0.2",
+    "unzip": "^0.1.11",
+    "unzip2": "^0.2.5"
   }
 }
