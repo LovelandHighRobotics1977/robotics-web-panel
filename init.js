@@ -28,8 +28,9 @@ function init() {
 
     function build() {
         console.log('Beginning Build...')
-        cmd.get("cd site && npm install && npm run build", () => {
+        cmd.get("cd site && npm install"/* && npm run build"*/, () => {
             console.log("Build Done")
+            cmd.run("cd site && npm run dev")
         })
     }
 }
