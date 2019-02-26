@@ -29,7 +29,7 @@ function createWindow() {
     });
     init();
 
-    mainWindow.loadURL(`http://localhost:8080`);
+    mainWindow.loadURL(`file://${__dirname}/app/www/index.html`);
     mainWindow.openDevTools();
     mainWindow.webContents.on("dom-ready", () => {
         mainWindow.show();
