@@ -19,9 +19,6 @@
     "build": "cp -R src/assets static/ && node build/build.js"
   },
   "dependencies": {
-    "jszip": "^3.1.5",
-    "jszip-utils": "0.0.2",
-    "mobile-detect": "^1.4.3",
     "querystring": "^0.2.0",
     "request": "^2.88.0",
     "vue": "^2.5.2",
