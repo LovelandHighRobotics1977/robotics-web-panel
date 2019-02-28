@@ -1,12 +1,5 @@
 <template>
   <div id="app">
-    <div>
-      <center>
-        <router-link replace to="/Home">
-          <img src="./assets/images/banner.svg" class="banner">
-        </router-link>
-      </center>
-    </div>
     <categories :categories="categories"/>
     <router-view></router-view>
   </div>
@@ -40,7 +33,7 @@ body {
   height: 100%;
   color: @white;
   font-family: Roboto;
-  background: url("./assets/ig/1.png") no-repeat left top @background-primary;
+  background: @background-primary;
   background-size: cover;
 }
 

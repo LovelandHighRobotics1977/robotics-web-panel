@@ -1,5 +1,4 @@
 const path = require("path");
-const { init } = require("./init.js")
 const cmd = require("node-cmd");
 
 const { app } = require("electron");
@@ -27,7 +26,6 @@ function createWindow() {
             zoomFactor: 1.0
         }
     });
-    init();
 
     mainWindow.loadURL(`file://${__dirname}/app/www/index.html`);
     mainWindow.openDevTools();

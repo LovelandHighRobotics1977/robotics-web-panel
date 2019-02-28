@@ -5,7 +5,7 @@
       <center>
         <h3>
           <span v-for="(line, index) of synopsis" v-bind:key="line">
-            {{ line }}
+            <input type="text" class="input synopsis" :placeholder="line" v-on:input="update('synopsis')">
             <br v-if="index != synopsis.length-1">
           </span>
         </h3>
@@ -13,6 +13,7 @@
     </div>
     <div class="video-container">
       <center>
+        <input type="text" class="input videoid" :placeholder="original.videoid" v-on:input="update('videoid')">
         <div class="video">
           <iframe
             width="100%"
@@ -28,7 +29,7 @@
     </div>
     <div class="home-desc">
       <center>
-        <p>{{ home_desc }}</p>
+        <textarea type="text" class="input home_desc" :placeholder="original.home_desc" v-on:input="update('home_desc')"></textarea>
       </center>
     </div>
 
@@ -41,6 +42,13 @@
           "{{ quote.text }}"
           <br>
           - {{ quote.author.title }}, {{ quote.author.name }} ({{ quote.author.grad }} grad)
+        </p>
+      </center>
+      <center>
+        <p class="quote">
+          <span class="up">"</span><textarea type="text" class="input quote_text" placeholder="(quote)" :style="'width: ' + widths.quote.text + 'ch;'" v-on:input="update('quote_text')"></textarea><span>"</span>
+          <br>
+          <span>-</span> <input type="text" class="input quote_author_title" placeholder="(Author Title)" :style="'width: ' + widths.quote.author.title + 'ch;'" v-on:input="update('quote_author_title')"><span>,</span> <input type="text" class="input quote_author_name" placeholder="(Author Name)" :style="'width: ' + widths.quote.author.name + 'ch;'" v-on:input="update('quote_author_name')"> <span>(</span><input type="text" class="input quote_author_grad" placeholder="(Author Graduation Year)" :style="'width: ' + widths.quote.author.grad + 'ch;'" v-on:input="update('quote_author_grad')"><span> grad)</span>
         </p>
       </center>
     </div>
@@ -72,6 +80,26 @@ export default {
         this.$data.quotes = data.quotes;
       }
     )
+    this.$data.original = Object.assign({}, this.$data);
+
+  },
+  methods: {
+    update(src) {
+      let value = document.body.getElementsByClassName(src)[0].value;
+
+      if (src == "videoid" && value.length == 11) this.$data.videoid = value; else this.$data.videoid = this.$data.original.videoid.slice();
+      if (src == "quote_text") this.$data.widths.quote.text = value.length+9;
+      if (src == "quote_author_title") this.$data.widths.quote.author.title = value.length+2;
+      if (src == "quote_author_name") this.$data.widths.quote.author.name = value.length+2;
+      if (src == "quote_author_grad") this.$data.widths.quote.author.grad = value.length+2;
+      if (src == "discord") this.$data.submition.author.discordID = value;
+      if (src == "source") {
+        this.$data.submition.source.type = "github";
+        this.$data.submition.source.user = "foo";
+        this.$data.submition.source.id = value;
+      }
+      if (src == "notes") this.$data.submition.notes = value;
+    }
   }
 };
 </script>
@@ -90,13 +118,6 @@ export default {
 .video {
   width: 40rem;
   height: 22.5rem;
-  transition: 500ms;
-  &:hover {
-    transition: 500ms;
-    width: 45rem;
-    height: 25.4rem;
-    box-shadow: -0.3rem 0.3rem 0.1rem @gray4;
-  }
 }
 
 .home-desc {
@@ -124,6 +145,31 @@ export default {
 
 .quote {
   width: 80%;
+}
+
+
+.input {
+  background: transparent;
+  border: none;
+  outline-color: transparent !important;
+  color: @white;
+  width: 100%;
+  text-align: center;
+  display: inline;
+  :focus {
+    outline-color: transparent !important;
+  }
+  &.home_desc {
+    height: 4rem;
+    resize: none;
+  }
+  &.quote_text,.quote_author_title,.quote_author_name,.quote_author_grad {
+    width: fit-content;
+  }
+}
+
+.up {
+  vertical-align: top;
 }
 </style>
 

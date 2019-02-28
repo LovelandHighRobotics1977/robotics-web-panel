@@ -29,5 +29,16 @@ export default {
                 grad: 2020
             }
         }
-    ]
+    ],
+    original: {},
+    widths: {
+        quote: {
+            text: 9,
+            author: {
+                title: 11,
+                name: 12,
+                grad: 20
+            }
+        }
+    }
 }
