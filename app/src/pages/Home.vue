@@ -37,7 +37,8 @@
       <center>
         <h2>Member Quotes</h2>
       </center>
-      <center v-for="quote of quotes" v-bind:key="quote">
+      <center v-for="(quote, index) of quotes" v-bind:key="quote">
+        <i class="fas fa-times exit" v-on:click="remove_quote(index)"></i>
         <p class="quote">
           "{{ quote.text }}"
           <br>
@@ -45,6 +46,7 @@
         </p>
       </center>
       <center>
+        <i class="fas fa-plus add" v-on:click="add_quote(index)"></i>
         <p class="quote">
           <span class="up">"</span><textarea type="text" class="input quote_text" placeholder="(quote)" :style="'width: ' + widths.quote.text + 'ch;'" v-on:input="update('quote_text')"></textarea><span>"</span>
           <br>
@@ -99,6 +101,13 @@ export default {
         this.$data.submition.source.id = value;
       }
       if (src == "notes") this.$data.submition.notes = value;
+    },
+    remove_quote(index) {
+      this.$delete(this.$data.quotes, index)
+      // this.$data.quotes = this.$data.quotes.slice(index);
+    },
+    add_quote() {
+      console.log("Adding quote");
     }
   }
 };
@@ -170,6 +179,22 @@ export default {
 
 .up {
   vertical-align: top;
+}
+
+.exit {
+  transform: translate(40vw,2.5rem);
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.add {
+  transform: translate(40vw,2.5rem);
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 </style>
 
