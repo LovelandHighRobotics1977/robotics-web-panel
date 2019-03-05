@@ -4,6 +4,11 @@
     <center>
       <div class="infocard" v-for="picture of pictures" v-bind:key="picture">
         <img :src="picture" class="gimg">
+        <i class="fas fa-times exit" v-on:click="remove_image(index)"></i>
+      </div>
+      <div class="infocard">
+        <img :src="gallery" class="gimg">
+        <i class="fas fa-plus add" v-on:click="add_image()"></i>
       </div>
     </center>
   </div>
@@ -31,6 +36,14 @@ export default {
         this.$data.pictures = data.pictures;
       }
     )
+  },
+  methods: {
+    remove_image(index) {
+      this.$delete(this.$data.pictures, index)
+    },
+    add_image() {
+      this.$data.pictures.push(this.$data.picture)
+    }
   }
 };
 </script>
@@ -43,5 +56,17 @@ export default {
   padding-bottom: @gimg-pad;
   padding-right: @gimg-pad;
   padding-left: @gimg-pad;
+  &:hover {
+    opacity: .5;
+    background: rgba(0,0,0,.3);
+  }
+}
+
+.exit {
+  transform: translate(-10rem,-10rem);
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 </style>

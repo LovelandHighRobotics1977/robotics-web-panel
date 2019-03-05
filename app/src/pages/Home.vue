@@ -46,7 +46,7 @@
         </p>
       </center>
       <center>
-        <i class="fas fa-plus add" v-on:click="add_quote(index)"></i>
+        <i class="fas fa-plus add" v-on:click="add_quote()"></i>
         <p class="quote">
           <span class="up">"</span><textarea type="text" class="input quote_text" placeholder="(quote)" :style="'width: ' + widths.quote.text + 'ch;'" v-on:input="update('quote_text')"></textarea><span>"</span>
           <br>
@@ -91,9 +91,13 @@ export default {
 
       if (src == "videoid" && value.length == 11) this.$data.videoid = value; else this.$data.videoid = this.$data.original.videoid.slice();
       if (src == "quote_text") this.$data.widths.quote.text = value.length+9;
+      if (src == "quote_text") this.$data.quote.text = value;
       if (src == "quote_author_title") this.$data.widths.quote.author.title = value.length+2;
+      if (src == "quote_author_title") this.$data.quote.author.title = value;
       if (src == "quote_author_name") this.$data.widths.quote.author.name = value.length+2;
+      if (src == "quote_author_name") this.$data.quote.author.name = value;
       if (src == "quote_author_grad") this.$data.widths.quote.author.grad = value.length+2;
+      if (src == "quote_author_grad") this.$data.quote.author.grad = value;
       if (src == "discord") this.$data.submition.author.discordID = value;
       if (src == "source") {
         this.$data.submition.source.type = "github";
@@ -108,6 +112,11 @@ export default {
     },
     add_quote() {
       console.log("Adding quote");
+      this.$data.quotes.push(this.$data.quote);
+      document.body.getElementsByClassName("quote_text")[0].value = ""
+      document.body.getElementsByClassName("quote_author_title")[0].value = ""
+      document.body.getElementsByClassName("quote_author_name")[0].value = ""
+      document.body.getElementsByClassName("quote_author_grad")[0].value = ""
     }
   }
 };

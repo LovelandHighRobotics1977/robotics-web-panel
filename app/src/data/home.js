@@ -31,6 +31,14 @@ export default {
         }
     ],
     original: {},
+    quote: {
+        text: "",
+        author: {
+            title: "",
+            name: "",
+            grad: undefined
+        }
+    },
     widths: {
         quote: {
             text: 9,
