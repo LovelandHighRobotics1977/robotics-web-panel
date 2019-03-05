@@ -2,13 +2,13 @@
   <div class="content list">
     <title>LHR - Gallery</title>
     <center>
-      <div class="infocard" v-for="picture of pictures" v-bind:key="picture">
+      <div class="infocard" v-for="(picture, index) of pictures" v-bind:key="picture">
         <img :src="picture" class="gimg">
         <i class="fas fa-times exit" v-on:click="remove_image(index)"></i>
       </div>
       <div class="infocard">
-        <img :src="gallery" class="gimg">
-        <i class="fas fa-plus add" v-on:click="add_image()"></i>
+        <img :src="picture" class="gimg">
+        <input type="text" class="add" v-on:input="update_image()">
       </div>
     </center>
   </div>
@@ -40,9 +40,13 @@ export default {
   methods: {
     remove_image(index) {
       this.$delete(this.$data.pictures, index)
+      //this.$data.pictures = this.$data.pictures.slice(index)
     },
     add_image() {
       this.$data.pictures.push(this.$data.picture)
+    },
+    update_image() {
+      this.$data.picture = document.body.getElementsByClassName("add")[0].value;
     }
   }
 };
