@@ -30,13 +30,13 @@
             placeholder="title"
             v-on:input="update('title')"
           ><br>
-          <input
+          <div v-for="desc of edit.desc" v-bind:key="desc"><input
             type="text"
             ref="edit_desc"
             class="edit_input"
             placeholder="description"
             v-on:input="update('edit_desc')"
-          >
+          ></div>
         </center>
     </div>
     <list :list="sponsors"/>
@@ -91,14 +91,15 @@ export default {
     },
     edit_listing(index) {
       this.$data.edit = Object.assign({}, this.$data.sponsors[index]);
+      this.$data.edit_original = Object.assign({}, this.$data.edit);
       this.$nextTick(() => this.$data.inputting = true);
     },
     remove_listing(index) {
       this.$delete(this.$data.sponsors, index);
     },
     update(src) {
-      if (src = "logo") this.$data.edit.logo = this.$refs.edit_logo.value;
-      if (src = "title") this.$data.edit.title = this.$refs.edit_title.value
+      if (src = "logo") if (this.$refs.edit_logo.value != "") this.$data.edit.logo = this.$refs.edit_logo.value; else this.$data.edit.logo = this.$data.edit_original.logo;
+      if (src = "title") if(this.$refs.edit_title.value != "") this.$data.edit.title = this.$refs.edit_title.value; else this.$data.edit.title = this.$data.edit_original.title;
     }
   }
 };
@@ -152,7 +153,6 @@ export default {
   margin-top: none;
   float: left;
   width: auto;
-  cursor: pointer;
   & p {
     font-size: x-large;
   }

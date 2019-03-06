@@ -55,5 +55,6 @@ export default {
     ],
     inputting: false,
     editing: false,
-    edit: {}
+    edit: {},
+    edit_original: {}
 }
