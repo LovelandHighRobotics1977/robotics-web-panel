@@ -2,6 +2,7 @@
   <div class="content list">
     <title>LHR - Sponsors</title>
     <list :list="sponsors"/>
+    <center><button class="add_button" v-on:click="new_sponsor">Sponsor</button></center>
   </div>
 </template>
 
@@ -31,9 +32,29 @@ export default {
         this.$data.sponsors = data.sponsors;
       }
     )
+  },
+  methods: {
+    new_sponsor() {
+
+    }
   }
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+@import "./../stylesheets/colors.less";
+
+.add_button {
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+  width: 7rem;
+  height: 2rem;
+  border: none;
+  background: @accent-primary;
+  color: @white;
+  &:hover {
+    cursor: pointer;
+    background: @accent-secondary;
+  }
+}
 </style>

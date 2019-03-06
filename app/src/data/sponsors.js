@@ -52,5 +52,6 @@ export default {
             title: "Lockheed Martin",
             description: ["2016 - $1600"]
         }
-    ]
+    ],
+    inputting: false
 }

@@ -2,9 +2,9 @@
   <desk>
     <div
       class="listing"
-      v-for="listing of list"
+      v-for="(listing, index) of list"
       v-bind:key="listing"
-      v-on:click="openInNewTab(listing.url)"
+      v-on:click="$parent.edit(index);"
       :title="listing.url"
     >
       <desk-row>
@@ -16,6 +16,7 @@
           <p v-for="desc of listing.description" v-bind:key="desc">{{ desc }}</p>
           <p>{{ listing.url }}</p>
         </desk-cell>
+        <i class="fas fa-times exit" v-on:click="$parent.remove_listing(index)"></i>
       </desk-row>
     </div>
   </desk>
@@ -33,12 +34,6 @@ export default {
     Desk,
     DeskRow,
     DeskCell
-  },
-  methods: {
-    openInNewTab(url) {
-      let page = window.open(url, "_blank");
-      win.focus();
-    }
   }
 };
 </script>
