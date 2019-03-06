@@ -63,7 +63,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 @import "./../stylesheets/colors.less";
 
 .content.list {

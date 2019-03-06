@@ -98,6 +98,7 @@ export default {
     },
     update(src) {
       if (src = "logo") this.$data.edit.logo = this.$refs.edit_logo.value;
+      if (src = "title") this.$data.edit.title = this.$refs.edit_title.value
     }
   }
 };
