@@ -55,7 +55,8 @@ export default {
       this.$data.inputting = true;
       this.$nextTick(() => this.$refs.add_input.focus());
     },
-    update_image() {
+    update_image(e) {
+      console.log(e);
       this.$data.picture = document.body.getElementsByClassName("add_input")[0].value;
     }
   }

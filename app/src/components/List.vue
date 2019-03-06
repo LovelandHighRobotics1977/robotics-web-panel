@@ -4,7 +4,7 @@
       class="listing"
       v-for="(listing, index) of list"
       v-bind:key="listing"
-      v-on:click="$parent.edit(index);"
+      v-on:click="edit_listing(index);"
       :title="listing.url"
     >
       <desk-row>
@@ -16,7 +16,7 @@
           <p v-for="desc of listing.description" v-bind:key="desc">{{ desc }}</p>
           <p>{{ listing.url }}</p>
         </desk-cell>
-        <i class="fas fa-times exit" v-on:click="$parent.remove_listing(index)"></i>
+        <i class="fas fa-times exit" v-on:click="remove_listing(index)"></i>
       </desk-row>
     </div>
   </desk>
@@ -34,6 +34,14 @@ export default {
     Desk,
     DeskRow,
     DeskCell
+  },
+  methods: {
+    remove_listing(index) {
+      this.$parent.remove_listing(index);
+    },
+    edit_listing(index) {
+      this.$parent.edit_listing(index);
+    }
   }
 };
 </script>

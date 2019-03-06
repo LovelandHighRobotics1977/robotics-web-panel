@@ -53,5 +53,7 @@ export default {
             description: ["2016 - $1600"]
         }
     ],
-    inputting: false
+    inputting: false,
+    editing: false,
+    edit: {}
 }
