@@ -30,13 +30,25 @@
             placeholder="title"
             v-on:input="update('title')"
           ><br>
-          <div v-for="desc of edit.desc" v-bind:key="desc"><input
+          <div v-for="(desc, index) of edit.description" v-bind:key="desc"><input
             type="text"
             ref="edit_desc"
             class="edit_input"
             placeholder="description"
-            v-on:input="update('edit_desc')"
-          ></div>
+            v-on:input="update('desc', index)"
+            :value="desc"
+          ><i class="fas fa-times exit" v-on:click="remove_desc(index)"></i></div>
+          <br>
+          <input
+            type="text"
+            ref="edit_url"
+            class="edit_input"
+            placeholder="url"
+            v-on:input="update('url')"
+          >
+          <br>
+          <button class="add_button" v-on:click="add_desc()">Add Description</button>
+          <br>
         </center>
     </div>
     <list :list="sponsors"/>
@@ -97,9 +109,21 @@ export default {
     remove_listing(index) {
       this.$delete(this.$data.sponsors, index);
     },
-    update(src) {
+    update(src, index = 0) {
       if (src = "logo") if (this.$refs.edit_logo.value != "") this.$data.edit.logo = this.$refs.edit_logo.value; else this.$data.edit.logo = this.$data.edit_original.logo;
-      if (src = "title") if(this.$refs.edit_title.value != "") this.$data.edit.title = this.$refs.edit_title.value; else this.$data.edit.title = this.$data.edit_original.title;
+      if (src = "title") if (this.$refs.edit_title.value != "") this.$data.edit.title = this.$refs.edit_title.value; else this.$data.edit.title = this.$data.edit_original.title;
+      if (src = "desc") if (this.$refs.edit_desc[index].value != "") {
+        this.$data.edit.description[index] = this.$refs.edit_desc[index].value;
+        this.$forceUpdate();
+        this.$nextTick(() => this.$refs.edit_desc[index].focus());
+      } else this.$data.edit.description[index] = this.$data.edit_original.description[index];
+      if (src = "url") if (this.$refs.edit_url.value != "") this.$data.edit.url = this.$refs.edit_url.value; else this.$data.edit.url = this.$data.edit_original.url;
+    },
+    remove_desc(index) {
+      this.$delete(this.$data.edit.description, index);
+    },
+    add_desc() {
+      this.$data.edit.description.push("");
     }
   }
 };
